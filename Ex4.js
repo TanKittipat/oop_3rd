@@ -27,12 +27,11 @@ class Shape {
   }
 }
 
-class Circle {
-  shape = null;
+class Circle extends Shape {
   radius = 1.0;
-  constructor(radius = 1.0, shape) {
+  constructor(radius = 1.0, color, filled) {
+    super(color, filled);
     this.radius = radius;
-    this.shape = shape;
   }
 
   getRadius() {
@@ -52,16 +51,15 @@ class Circle {
   }
 
   toString() {
-    return `Circle[${this.shape.toString()}, radius = ${this.radius}]`;
+    return `Circle[${super.toString()}, radius = ${this.radius}]`;
   }
 }
 
-class Rectangle {
-  shape = null;
+class Rectangle extends Shape {
   width = 1.0;
   length = 1.0;
-  constructor(shape, width = 1.0, length = 1.0) {
-    this.shape = shape;
+  constructor(width = 1.0, length = 1.0, color, filled) {
+    super(color, filled);
     this.width = width;
     this.length = length;
   }
@@ -91,19 +89,16 @@ class Rectangle {
   }
 
   toString() {
-    return `Rectangle[${this.shape.toString()}, width = ${
-      this.width
-    }, length = ${this.length}]`;
+    return `Rectangle[${super.toString()}, width = ${this.width}, length = ${
+      this.length
+    }]`;
   }
 }
 
-class Square {
-  rectangle = null;
+class Square extends Rectangle {
   side = 1.0;
-  width = this.side;
-  length = this.side;
-  constructor(side = 1.0, rectangle) {
-    this.rectangle = rectangle;
+  constructor(side = 1.0, width, length, color, filled) {
+    super(width, length, color, filled);
     this.side = side;
   }
 
@@ -124,17 +119,17 @@ class Square {
   }
 
   toString() {
-    return `Square[${this.rectangle.toString()}, width = ${
-      this.width
-    }, length = ${this.length}]`;
+    return `Square[${super.toString()}, width = ${this.width}, length = ${
+      this.length
+    }]`;
   }
 }
 
 const main = () => {
   const shape1 = new Shape("Green", true);
-  const circle1 = new Circle(5.0, shape1);
-  const rectangle1 = new Rectangle(shape1, 25, 50);
-  const square1 = new Square(15, rectangle1);
+  const circle1 = new Circle(5.0, shape1.color, shape1.filled);
+  const rectangle1 = new Rectangle(25, 50, "Red", true);
+  const square1 = new Square(15, 15, 15, "Blue", true);
 
   console.log(square1.toString());
 };

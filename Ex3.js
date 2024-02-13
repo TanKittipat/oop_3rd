@@ -23,13 +23,12 @@ class Person {
   }
 }
 
-class Student {
-  person = null;
+class Student extends Person {
   program = "";
   year = 0;
   fee = 0;
-  constructor(person, program, year, fee) {
-    this.person = person;
+  constructor(name, address, program, year, fee) {
+    super(name, address);
     this.program = program;
     this.year = year;
     this.fee = fee;
@@ -60,18 +59,17 @@ class Student {
   }
 
   toString() {
-    return `Student[${this.person.toString()}, program = ${
-      this.program
-    }, year = ${this.year}, fee = ${this.fee}]`;
+    return `Student[${super.toString()}, program = ${this.program}, year = ${
+      this.year
+    }, fee = ${this.fee}]`;
   }
 }
 
-class Staff {
-  person = null;
+class Staff extends Person {
   school = "";
   pay = 0;
-  constructor(person, school, pay) {
-    this.person = person;
+  constructor(name, address, school, pay) {
+    super(name, address);
     this.school = school;
     this.pay = pay;
   }
@@ -93,7 +91,7 @@ class Staff {
   }
 
   toString() {
-    return `Staff[${this.person.toString()}, school = ${this.school}, pay = ${
+    return `Staff[${super.toString()}, school = ${this.school}, pay = ${
       this.pay
     }]`;
   }
@@ -101,8 +99,14 @@ class Staff {
 
 const main = () => {
   const person1 = new Person("Kay", "Ban Kay");
-  const student1 = new Student(person1, "Software Engineer", 65, 11400);
-  const staff1 = new Staff(person1, "npru", 11400);
+  const student1 = new Student(
+    "Kay",
+    "Kay House",
+    "Software Engineer",
+    65,
+    11400
+  );
+  const staff1 = new Staff("Kay", "Kay House", "npru", 11400);
 
   console.log(student1.toString());
 };
