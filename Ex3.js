@@ -101,10 +101,10 @@ class Staff {
 
 const main = () => {
   const person1 = new Person("Kay", "Ban Kay");
-  const student1 = new Student(person1, "Software Engineer", 2, 0);
+  const student1 = new Student(person1, "Software Engineer", 65, 11400);
   const staff1 = new Staff(person1, "npru", 11400);
 
-  console.log(staff1.toString());
+  console.log(student1.toString());
 };
 
 main();
