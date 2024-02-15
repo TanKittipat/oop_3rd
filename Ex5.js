@@ -1,7 +1,7 @@
 class Customer {
   name = "";
-  //   member = false;
-  //   memberType = "";
+  member = false;
+  memberType = 0;
   constructor(name, member = false, memberType) {
     this.name = name;
     this.member = member;
@@ -34,8 +34,10 @@ class Customer {
 }
 
 class Visit {
-  name = "";
+  customer = null;
   date = "";
+  serviceExpense = 0;
+  productExpense = 0;
   constructor(customer, date, serviceExpense, productExpense) {
     this.customer = customer;
     this.date = date;
@@ -77,30 +79,30 @@ class Visit {
 }
 
 class DiscountRate {
-  static serviceDiscountPremium = new DiscountRate(0.2);
-  static serviceDiscountGold = new DiscountRate(0.15);
-  static serviceDiscountSilver = new DiscountRate(0.1);
-  static productDiscountPremium = new DiscountRate(0.1);
-  static productDiscountGold = new DiscountRate(0.1);
-  static productDiscountSilver = new DiscountRate(0.1);
-  constructor(service, product) {
-    this.service = service;
-    this.product = product;
+  static SPREMIUM = new DiscountRate(0.2);
+  static SGOLD = new DiscountRate(0.15);
+  static SSILVER = new DiscountRate(0.1);
+  static PPREMIUM = new DiscountRate(0.1);
+  static PGOLD = new DiscountRate(0.1);
+  static PSILVER = new DiscountRate(0.1);
+
+  constructor(name) {
+    this.name = name;
   }
 
   getServiceDiscountRate() {
-    return this.service;
+    return this.name;
   }
 
   getProductDiscountRate() {
-    return this.product;
+    return this.name;
   }
 }
 
 const main = () => {
-  const customer1 = new Customer("Punsan", true, "Customer");
+  const customer1 = new Customer("Punsan", true, DiscountRate.SGOLD);
   const visit1 = new Visit(customer1, "2024/02/13", 500, 500);
 
-  console.log(visit1.toString());
+  console.log(customer1.toString());
 };
 main();
