@@ -21,21 +21,7 @@ class Customer {
   }
 
   getMemberType() {
-    if (
-      this.memberType == DiscountRate.SGOLD ||
-      this.memberType == DiscountRate.SPREMIUM ||
-      this.memberType == DiscountRate.SSILVER
-    ) {
-      return this.memberType.getServiceDiscountRate();
-    } else if (
-      this.memberType == DiscountRate.PGOLD ||
-      this.memberType == DiscountRate.PPREMIUM ||
-      this.memberType == DiscountRate.PSILVER
-    ) {
-      return this.memberType.getProductDiscountRate();
-    } else {
-      return null;
-    }
+    return this.memberType.getDiscountRate();
   }
 
   setMemberType(memberType) {
@@ -82,30 +68,29 @@ class Visit {
   }
 
   getTotalExpense() {
-    let totalExpense = 0;
+    let total = 0;
     if (
-      this.memberType == DiscountRate.SGOLD ||
-      this.memberType == DiscountRate.SPREMIUM ||
-      this.memberType == DiscountRate.SSILVER
+      this.customer.memberType == DiscountRate.PGOLD ||
+      this.customer.memberType == DiscountRate.PPREMIUM ||
+      this.customer.memberType == DiscountRate.PSILVER
     ) {
-      totalExpense =
-        this.serviceExpense -
-        this.serviceExpense * this.customer.getMemberType() +
-        this.productExpense;
-      return totalExpense;
-    } else if (
-      this.memberType == DiscountRate.PGOLD ||
-      this.memberType == DiscountRate.PPREMIUM ||
-      this.memberType == DiscountRate.PSILVER
-    ) {
-      totalExpense =
+      total =
+        this.serviceExpense +
         this.productExpense -
-        this.productExpense * this.customer.getMemberType() +
-        this.serviceExpense;
-      return totalExpense;
+        this.productExpense * this.customer.getMemberType();
+    } else if (
+      this.customer.memberType == DiscountRate.SGOLD ||
+      this.customer.memberType == DiscountRate.SPREMIUM ||
+      this.customer.memberType == DiscountRate.SSILVER
+    ) {
+      total =
+        this.serviceExpense +
+        this.productExpense -
+        this.serviceExpense * this.customer.getMemberType();
     } else {
-      return this.serviceExpense + this.productExpense;
+      total = this.serviceExpense + this.productExpense;
     }
+    return total;
   }
 
   toString() {
@@ -129,20 +114,24 @@ class DiscountRate {
     this.name = name;
   }
 
-  getServiceDiscountRate() {
+  getDiscountRate() {
     return this.name;
   }
 
-  getProductDiscountRate() {
-    return this.name;
-  }
+  // getServiceDiscountRate() {
+  //   return this.name;
+  // }
+
+  // getProductDiscountRate() {
+  //   return this.name;
+  // }
 }
 
 const main = () => {
-  const customer1 = new Customer("Punsan", true, DiscountRate.PGOLD);
+  const customer1 = new Customer("Punsan", true, DiscountRate.SPREMIUM);
   const customer2 = new Customer("Best", true, DiscountRate.SPREMIUM);
   const visit1 = new Visit(customer1, "2024/02/13", 500, 500);
 
-  console.log(customer2.getMemberType());
+  console.log(visit1.toString());
 };
 main();
