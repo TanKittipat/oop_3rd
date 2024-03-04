@@ -1,6 +1,6 @@
 class Shape {
   color = "";
-  filled = false;
+  filled = true;
   constructor(color, filled) {
     this.color = color;
     this.filled = filled;
