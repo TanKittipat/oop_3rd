@@ -96,10 +96,8 @@ class Rectangle extends Shape {
 }
 
 class Square extends Rectangle {
-  side = 1.0;
-  constructor(side = 1.0, width, length, color = "red", filled = true) {
-    super(width, length, color, filled);
-    this.side = side;
+  constructor(side = 1.0, color = "red", filled = true) {
+    super(side, side, color, filled);
   }
 
   getSide() {
@@ -107,15 +105,16 @@ class Square extends Rectangle {
   }
 
   setSide(side) {
-    this.side = side;
+    this.width = side;
+    this.length = side;
   }
 
-  setWidth() {
-    this.width = this.side;
+  setWidth(side) {
+    this.setSide(side)
   }
 
-  setLength() {
-    this.length = this.side;
+  setLength(side) {
+    this.setSide(side)
   }
 
   toString() {
@@ -129,7 +128,7 @@ const main = () => {
   const shape1 = new Shape("Green", true);
   const circle1 = new Circle(5.0, shape1.color, shape1.filled);
   const rectangle1 = new Rectangle(25, 50, "Red", true);
-  const square1 = new Square(15, 15, 15, "Blue", true);
+  const square1 = new Square(15, "Blue", true);
 
   console.log(square1.toString());
 };
