@@ -1,11 +1,9 @@
 class Customer {
   name = "";
   member = false;
-  memberType = 0;
-  constructor(name, member = false, memberType) {
+  memberType = "";
+  constructor(name) {
     this.name = name;
-    this.member = member;
-    this.memberType = memberType;
   }
 
   getName() {
@@ -38,11 +36,9 @@ class Visit {
   date = "";
   serviceExpense = 0;
   productExpense = 0;
-  constructor(customer, date, serviceExpense, productExpense) {
+  constructor(customer, date) {
     this.customer = customer;
     this.date = date;
-    this.serviceExpense = serviceExpense;
-    this.productExpense = productExpense;
   }
 
   getName() {
@@ -66,7 +62,19 @@ class Visit {
   }
 
   getTotalExpense() {
-    return this.serviceExpense + this.productExpense;
+    let total = 0;
+    let proTotal =
+      this.getProductExpense() -
+      DiscountRate.getProductDiscountRate(this.customer.getMemberType()) *
+        this.getProductExpense();
+    let serTotal =
+      this.getServiceExpense() -
+      DiscountRate.getServiceDiscountRate(this.customer.getMemberType()) *
+        this.getServiceExpense();
+
+    total = serTotal + proTotal;
+
+    return total;
   }
 
   toString() {
@@ -79,30 +87,50 @@ class Visit {
 }
 
 class DiscountRate {
-  static SPREMIUM = new DiscountRate(0.2);
-  static SGOLD = new DiscountRate(0.15);
-  static SSILVER = new DiscountRate(0.1);
-  static PPREMIUM = new DiscountRate(0.1);
-  static PGOLD = new DiscountRate(0.1);
-  static PSILVER = new DiscountRate(0.1);
+  static PREMIUM = new DiscountRate("Premium");
+  static GOLD = new DiscountRate("Gold");
+  static SILVER = new DiscountRate("Silver");
 
-  constructor(name) {
-    this.name = name;
+  constructor(type) {
+    this.type = type;
   }
 
-  getServiceDiscountRate() {
-    return this.name;
+  static getServiceDiscountRate(type) {
+    switch (type) {
+      case "Premium":
+        return 0.2;
+      case "Gold":
+        return 0.15;
+      case "Silver":
+        return 0.1;
+      default:
+        return 0;
+    }
   }
 
-  getProductDiscountRate() {
-    return this.name;
+  static getProductDiscountRate(type) {
+    switch (type) {
+      case "Premium":
+        return 0.1;
+      case "Gold":
+        return 0.1;
+      case "Silver":
+        return 0.1;
+      default:
+        return 0;
+    }
   }
 }
 
 const main = () => {
-  const customer1 = new Customer("Punsan", true, DiscountRate.SGOLD);
-  const visit1 = new Visit(customer1, "2024/02/13", 500, 500);
+  const customer1 = new Customer("Punsan");
+  customer1.setMember(true);
+  customer1.setMemberType("Premium");
 
-  console.log(customer1.toString());
+  const visit1 = new Visit(customer1, "2024/02/13");
+  visit1.setProductExpense(150);
+  visit1.setServiceExpense(100);
+
+  console.log(visit1.toString());
 };
 main();
