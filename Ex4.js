@@ -118,9 +118,7 @@ class Square extends Rectangle {
   }
 
   toString() {
-    return `Square[${super.toString()}, width = ${this.width}, length = ${
-      this.length
-    }]`;
+    return `Square[${super.toString()}]`;
   }
 }
 
