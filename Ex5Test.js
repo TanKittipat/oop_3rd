@@ -110,12 +110,12 @@ class DiscountRate {
   static PGOLD = new DiscountRate(0.1);
   static PSILVER = new DiscountRate(0.1);
 
-  constructor(name) {
-    this.name = name;
+  constructor(number) {
+    this.number = number;
   }
 
   getDiscountRate() {
-    return this.name;
+    return this.number;
   }
 
   // getServiceDiscountRate() {
