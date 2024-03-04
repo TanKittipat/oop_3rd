@@ -1,5 +1,5 @@
 class Shape {
-  color = "";
+  color = "red";
   filled = true;
   constructor(color, filled) {
     this.color = color;
@@ -29,7 +29,7 @@ class Shape {
 
 class Circle extends Shape {
   radius = 1.0;
-  constructor(radius = 1.0, color, filled) {
+  constructor(radius = 1.0, color = "red", filled = true) {
     super(color, filled);
     this.radius = radius;
   }
@@ -58,7 +58,7 @@ class Circle extends Shape {
 class Rectangle extends Shape {
   width = 1.0;
   length = 1.0;
-  constructor(width = 1.0, length = 1.0, color, filled) {
+  constructor(width = 1.0, length = 1.0, color = "red", filled = true) {
     super(color, filled);
     this.width = width;
     this.length = length;
@@ -97,7 +97,7 @@ class Rectangle extends Shape {
 
 class Square extends Rectangle {
   side = 1.0;
-  constructor(side = 1.0, width, length, color, filled) {
+  constructor(side = 1.0, width, length, color = "red", filled = true) {
     super(width, length, color, filled);
     this.side = side;
   }
